@@ -80,6 +80,7 @@ var selectedcar;
 if (typeof(vehicleSet.get(CRLid[selectedcrlid])) != "undefined") {
    elementl = vehicleSet.get(CRLid[selectedcrlid]).map(item =>{
         if(item.status=="Available"){
+            console.log(item);
             return (<option key={item.barcode} value={item.id}>{item.make+" "+item.model}</option>);
         }
     });
