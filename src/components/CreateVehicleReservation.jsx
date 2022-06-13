@@ -16,7 +16,7 @@ let vehicleSet = new Map();
 let vehicleName = new Map('',[]);
 let availableNames = [];
 let availableVehicles = [];
-
+let type;
 
 export default function CreateVehicleReservation(){  
     const history = useHistory()
@@ -80,8 +80,9 @@ var selectedcar;
 if (typeof(vehicleSet.get(CRLid[selectedcrlid])) != "undefined") {
    elementl = vehicleSet.get(CRLid[selectedcrlid]).map(item =>{
         if(item.status=="Available"){
-            console.log(item);
-            return (<option key={item.barcode} value={item.id}>{item.make+" "+item.model}</option>);
+            type=item.type;
+            return (<option key={item.barcode} value={item.id+item.type}>{item.make+" "+item.model}</option>);
+            
         }
     });
 }
