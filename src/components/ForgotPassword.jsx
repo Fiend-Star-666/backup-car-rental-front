@@ -51,8 +51,9 @@ function ForgotPassword(){
     }
     
     return(
-                    <div className= "card col-md-4 offset-md-3 my-5 " style={{backgroundColor:'lavenderblush', margin:'auto'}} >
+                    <div className= "card col-md-5 offset-md-3 my-5 " style={{ margin:'auto'}} >
                         <h1>Forgot Password</h1>
+                        <br></br>
                         <label>Email Address:</label>
                         <div className='form-group'>
                         <input type="email"  placeholder="someone@email.com" name="email" onChange={handleEmailChange} value={email}/>
@@ -66,12 +67,12 @@ function ForgotPassword(){
                         
                         <label>Enter New Password:</label>
                         <div className='form-group'>
-                        <input  type="password" placeholder="new password" name="password" onChange={handlePasswordChange} value={password} />
+                        <input  type="password" placeholder="enter new password" name="password" onChange={handlePasswordChange} value={password} />
                         </div>
 
                         <label>Confirm New Password:</label>
                         <div className='form-group'>
-                        <input type="password" placeholder="new password" name="confirmPassword" onChange={handleConfirmPasswordChange} value={confirmPassword} />
+                        <input type="password" placeholder="confirm password" name="confirmPassword" onChange={handleConfirmPasswordChange} value={confirmPassword} />
                         </div>
                         <div>
                         <button className='btn-dark' onClick={saveNewPassword}>Submit</button>

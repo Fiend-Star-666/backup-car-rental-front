@@ -5,6 +5,7 @@ import UserService from "../../services/user.service";
 import EventBus from "../../common/EventBus";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import styled from "styled-components";
+import bgimage from '../../icons/clouds.svg'
 
 const CardWrapper = styled.div`
   width: 100%;
@@ -118,8 +119,10 @@ export default class BoardUser extends Component {
   render() {
     return (
       <div className="card">
-        <header className="jumbotron">
-          <h3 style={{textAlign:'center'}}>User Board</h3>
+        <header className="jumbotron" style={{ backgroundImage: `url(${bgimage})`, backgroundRepeat:  "no-repeat"}}>
+          <br></br>
+          <br></br>
+        <h1 style={{textShadow: '1px 2px', color:'darkmagenta'}}>Welcome, User</h1>
         </header>
 
         <CardWrapper>

@@ -216,15 +216,18 @@ const saveVehicleReservation = (e) => {
 
     console.log('vehicleReservation=> ' + JSON.stringify(vehicleReservation));
     let saveflag=true
-    
+if(dueDate>=creationDate){
     if(saveflag){
     VehicleService.createVehicleReservation(vehicleReservation).then( res => {
             history.push('/vehiclereservation/account/view/'+currentUser.accid);
     });
     }
 
-    else {return (<Prompt message="There has been some error Please try again later" />);}
-
+    else {return alert("There has been some error Please try again later");}
+}
+else{
+    return alert("Select Correct Dates");
+}
    
 }
 //_________________________________________________________Conditional Rendering of the Services and all_______________________________________

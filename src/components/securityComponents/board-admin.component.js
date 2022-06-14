@@ -4,6 +4,7 @@ import UserService from "../../services/user.service";
 import EventBus from "../../common/EventBus";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import styled from "styled-components";
+import bgimage from '../../icons/clouds.svg'
 
 const CardWrapper = styled.div`
   width: 100%;
@@ -115,9 +116,14 @@ export default class BoardAdmin extends Component {
 
   render() {
     return (
+      <>
       <div className="card">
-        <header className="jumbotron">
-          <h3 style={{textAlign:'center'}}>Admin Board</h3>
+        <header className="jumbotron" style={{ backgroundImage: `url(${bgimage})`, backgroundRepeat:  "no-repeat", opacity:'80%'}}>
+          <br></br>
+          <br></br>
+          <b>
+        <h1 style={{textShadow: '1px 2px', color:'darkmagenta'}}>Welcome, Admin</h1>
+        </b>
         </header>
 
 
@@ -337,7 +343,7 @@ export default class BoardAdmin extends Component {
           <br></br>
       </div>
 
-      
+      </>
       
     );
   }

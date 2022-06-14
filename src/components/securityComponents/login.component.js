@@ -45,10 +45,16 @@ export default class Login extends Component {
 
     this.form.validateAll();
     let loginDetails={email: this.state.username, password: this.state.password};
-    console.log(loginDetails);
+   
       AuthService.login(loginDetails).then(
         () => {
-          this.props.history.push("/profile");
+          const currentUser = AuthService.getCurrentUser();
+          if (currentUser.roles == "ROLE_ADMIN") {
+          this.props.history.push("/admin");
+          } 
+          if (currentUser.roles == "ROLE_USER") {
+            this.props.history.push("/user");
+          }
           window.location.reload();
         }
       ).catch(function (error){

@@ -97,6 +97,10 @@ class VehicleService{
         return axios.get(API_BASE_URL+"/account/vehiclereservation/vehicle/pickup/"+VRid);
     }
 
+    returnVehicle(VRid){
+        return axios.get(API_BASE_URL+"/account/vehiclereservation/vehicle/return/"+VRid);
+    }
+
     createVehicleLogByVehicleId(vehicleLog){
         return axios.post(API_BASE_URL+"/vehicle/createvehiclelog/",vehicleLog);
 
@@ -107,6 +111,7 @@ class VehicleService{
     updateVehicleLogById(vehicleLog,VehicleLogId){
         return axios.put(API_BASE_URL+"/updateVehicleLog/"+VehicleLogId,vehicleLog);
     }
+
 }
 
 export default new VehicleService();

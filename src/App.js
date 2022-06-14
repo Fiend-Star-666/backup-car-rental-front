@@ -34,6 +34,7 @@ import BoardUser from './components/securityComponents/board-user.component';
 import Register from './components/securityComponents/register.component';
 import EventBus from './common/EventBus';
 import UpdateVehicleLog from './components/UpdateVehicleLog';
+import Logo from "./icons/logo.svg";
 
 
 import error from './components/error';
@@ -42,6 +43,8 @@ import ViewPricing from './components/ViewPricing';
 import Catalog from './components/Catalog';
 import AboutUs from './components/AboutUs';
 import { NikeCard } from './components/NikeCard';
+import Frontpage from "./components/securityComponents/frontpage";
+import { blue } from '@material-ui/core/colors';
 
 class App extends Component{
   constructor(props) {
@@ -50,20 +53,29 @@ class App extends Component{
 
     this.state = {
       showAdminBoard: false,
+      showUserBoard: false,
       currentUser: undefined,
     };
   }
 
   componentDidMount() {
     const user = AuthService.getCurrentUser();
-
     if (user) {
       this.setState({
-        currentUser: user,
-        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+        currentUser: user
       });
+   
+    if (user.roles == "ROLE_ADMIN") {
+      this.setState({
+        showAdminBoard: true,
+      })
+      }
+      if(user.roles == "ROLE_USER"){
+        this.setState({
+          showUserBoard: true
+        });
+      }
     }
-    
     EventBus.on("logout", () => {
       this.logOut();
     });
@@ -79,6 +91,7 @@ class App extends Component{
     AuthService.logout();
     this.setState({
       showAdminBoard: false,
+      showUserBoard: false,
       currentUser: undefined,
     });
   }
@@ -88,20 +101,19 @@ class App extends Component{
 
   render(){
 
-    const { currentUser, showAdminBoard } = this.state;
+    const { currentUser, showAdminBoard, showUserBoard } = this.state;
 
     return (
       <div>
         <Router>
-            {/*<HeaderComponents />*/}
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/"} className="navbar-brand">
-            BoomCar
-          </Link>
+        <nav className="navbar navbar-expand navbar-light bg-light ">
+        <Link to={"/home"} className="navbar-brand">
+              <img src={Logo} alt="Helping Hand" style={{width: "100px"}} />
+            </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to={"/home"} className="nav-link">
-                Home
+                <b>Home</b>
               </Link>
             </li>
 
@@ -110,7 +122,7 @@ class App extends Component{
             {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/admin"} className="nav-link">
-                  Admin Board
+                  <b>Admin Board</b>
                 </Link>
               </li>
             )}
@@ -118,10 +130,10 @@ class App extends Component{
             
 
 
-            {currentUser && (
+            {showUserBoard && (
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
-                  User
+                <b>User</b>
                 </Link>
               </li>
             )}
@@ -129,23 +141,22 @@ class App extends Component{
 
             <li className="nav-item">
               <Link to={"/ViewPricing"} className="nav-link">
-                Pricing
+              <b>Pricing</b>
               </Link>
             </li>
 
             <li className="nav-item">
               <Link to={"/viewCar"} className="nav-link">
-                View Catalog
-              </Link>
-            </li>
-        
-            <li className="nav-item">
-              <Link to={"/aboutUs"} className="nav-link">
-                About
+              <b>View Catalog</b>
               </Link>
             </li>
         
 
+            <li className="nav-item">
+              <Link to={"/aboutUs"} className="nav-link">
+              <b>About</b>
+              </Link>
+            </li>
           </div>
 
           {currentUser ? (
@@ -154,7 +165,7 @@ class App extends Component{
             {showAdminBoard && (
             <li className="nav-item">
             <Link to={"/account/register/admin"} className="nav-link">
-              Register Admin
+            <b>Register Admin</b>
             </Link>
             </li>
             )}
@@ -162,13 +173,19 @@ class App extends Component{
 
               <li className="nav-item">
                 <Link to={"/profile"} className="nav-link">
-                  Profile
+                <b>Profile</b>
                 </Link>
               </li>
- 
+
+            <li className="nav-item">
+              <Link to={"/frontpage"} className="nav-link">
+              <b>How it Works?</b>
+              </Link>
+            </li>
+            
               <li className="nav-item">
                 <a href="/home" className="nav-link" onClick={this.logOut}>
-                  LogOut
+                <b>LogOut</b>
                 </a>
               </li>
             </div>
@@ -176,16 +193,25 @@ class App extends Component{
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/login"} className="nav-link">
-                  Login
+                <b>Login</b>
                 </Link>
               </li>
 
               <li className="nav-item">
                 <Link to={"/account/register/member"} className="nav-link">
-                  Sign Up Member
+                <b>Sign Up</b>
                 </Link>
               </li>
+
+            <li className="nav-item">
+              <Link to={"/frontpage"} className="nav-link">
+              <b>How it Works?</b>
+              </Link>
+            </li>
+
             </div>
+
+            
           )}
 
           
@@ -194,6 +220,8 @@ class App extends Component{
                   <div className="container">   
                       <Switch>
                         <Route exact path="/" component={Home} />
+                        <Route exact path="/frontpage" component={Frontpage} />
+
                         <Route exact path="/login" component={SLogin} />
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/profile" component={Profile} />
